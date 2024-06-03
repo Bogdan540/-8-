@@ -1,0 +1,35 @@
+#include <iostream>
+#include <string>
+#include <map>
+
+// Функція для обчислення факторіалу
+unsigned long long factorial(int n) {
+    unsigned long long result = 1;
+    for (int i = 2; i <= n; ++i) {
+        result *= i;
+    }
+    return result;
+}
+
+int main() {
+    std::string word;
+    std::cin >> word;
+    
+    int length = word.length();
+    std::map<char, int> frequency;
+
+    // Обчислюємо частоту кожної літери в слові
+    for (char c : word) {
+        frequency[c]++;
+    }
+
+    // Обчислюємо кількість анаграм
+    unsigned long long totalAnagrams = factorial(length);
+    for (auto& entry : frequency) {
+        totalAnagrams /= factorial(entry.second);
+    }
+
+    std::cout << totalAnagrams << std::endl;
+
+    return 0;
+}
